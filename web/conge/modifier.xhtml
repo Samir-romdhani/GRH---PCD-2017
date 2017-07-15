@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template0.xhtml">
+
+            <ui:define name="body">
+                <f:view>
+
+
+                    <h:form>
+                        <h1><h:outputText value="Create/Edit"/></h1>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="IdDemande:" for="idDemande" />
+                            <h:inputText id="idDemande" value="#{demandeabsenceController.selected.idDemande}" title="IdDemande" required="true" requiredMessage="The IdDemande field is required."/>
+                            <h:outputLabel value="Datecreation:" for="datecreation" />
+                            <h:inputText id="datecreation" value="#{demandeabsenceController.selected.datecreation}" title="Datecreation" >
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:inputText>
+                            <h:outputLabel value="Datedebut:" for="datedebut" />
+                            <h:inputText id="datedebut" value="#{demandeabsenceController.selected.datedebut}" title="Datedebut" >
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:inputText>
+                            <h:outputLabel value="Nombredejours:" for="nombredejours" />
+                            <h:inputText id="nombredejours" value="#{demandeabsenceController.selected.nombredejours}" title="Nombredejours" required="true" requiredMessage="The Nombredejours field is required."/>
+                            <h:outputLabel value="Type:" for="type" />
+                            <h:inputText id="type" value="#{demandeabsenceController.selected.type}" title="Type" />
+                            <h:outputLabel value="Datefin:" for="datefin" />
+                            <h:inputText id="datefin" value="#{demandeabsenceController.selected.datefin}" title="Datefin" >
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:inputText>
+                            <h:outputLabel value="Commmentaire:" for="commmentaire" />
+                           
+                            <h:inputText id="commmentaire" value="#{demandeabsenceController.selected.commmentaire}" title="Commmentaire" />
+                            <h:outputLabel value="Etat:" for="etat" />
+                            <h:inputText id="etat" value="#{demandeabsenceController.selected.etat}" title="Etat" />
+                            
+                            <h:commandButton value="save" action="#{demandeabsenceController.edit1()}" />
+                        </h:panelGrid>
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

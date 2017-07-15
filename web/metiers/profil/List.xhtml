@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../../template.xhtml">
+
+            
+            <ui:define name="body">
+                <f:view>
+                    <h:form>
+                        <h1><h:outputText value="Liste des mitiers"/></h1>
+                        <p:dataTable value="#{metierController.metiers}" var="item">
+                            <p:column style="width: 25px">
+                                <f:facet name="header">
+                                    <h:outputText value="" />
+                                </f:facet>
+                                <h:outputText value="#{item.identificationDuPoste}"/>
+                            </p:column>
+                            
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Poste"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nomDuPoste}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Description"/>
+                                </f:facet>
+                                <h:outputText value="#{item.descriptionPoste}"/>
+                            </p:column>
+                            
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+
+
+        </ui:composition>
+
+    </body>
+</html>

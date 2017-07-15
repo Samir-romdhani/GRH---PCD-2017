@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../template0.xhtml">
+
+            <ui:define name="body">
+                <f:view>
+                    <h:form id="form">
+                        <p:dataList value="#{demandeabsenceController.conges}" var="demande">
+                            <f:facet name="header">
+                                Liste des demandes d'absences
+                            </f:facet>
+                            #{demande.idEmploye.nom},#{demande.commmentaire}, #{demande.etat}
+                            <h:commandButton value="edit1" action="#{demandeabsenceController.Select(demande)}" />
+                        </p:dataList>
+                    </h:form>
+                    <h:form>
+                        <h1><h:outputText value="List"/></h1>
+                        <p:dataTable value="#{demandeabsenceController.conges}" var="item">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="IdDemande"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idDemande}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Datecreation"/>
+                                </f:facet>
+                                <h:outputText value="#{item.datecreation}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Datedebut"/>
+                                </f:facet>
+                                <h:outputText value="#{item.datedebut}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombredejours"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nombredejours}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Datefin"/>
+                                </f:facet>
+                                <h:outputText value="#{item.datefin}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Commmentaire"/>
+                                </f:facet>
+                                <h:outputText value="#{item.commmentaire}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Etat"/>
+                                </f:facet>
+                                <h:outputText value="#{item.etat}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="UserId"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idEmploye.nom}"/>
+                            </p:column>
+                            <!--<p:column>
+                                <h:commandButton value="Delete" action="#{demandeabsenceController.delete(item.idDemande)}" />                              
+                            </p:column>
+                            <p:column>
+                                <h:commandButton value="edit1" action="#{demandeabsenceController.Select(item)}" />           
+
+                            </p:column>
+                                <p:column>
+                                    <h:commandButton value="edit" action="#{demandeabsenceController.prepareedit(item.idDemande)}" />              
+                                </p:column> -->
+                            <p:column>
+                                <p:splitButton value="Save" action="#{demandeabsenceController.Select(item)}" icon="ui-icon-disk">
+                                    <p:menuitem value="Update" action="#{demandeabsenceController.Select(item)}" icon="ui-icon-arrowrefresh-1-w" />
+                                    <p:menuitem value="Delete" action="#{demandeabsenceController.delete(item.idDemande)}" ajax="false" icon="ui-icon-close" />
+                                    <p:separator />
+                                    <p:menuitem value="Homepage" url="http://www.primefaces.org" icon="ui-icon-extlink" />
+                                </p:splitButton>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

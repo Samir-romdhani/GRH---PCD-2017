@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <body>
+
+        <ui:composition template="/template.xhtml">
+            <ui:define name="body">
+                <b:row>
+                    <b:column span="4">
+                        <h:form id="ListForm">
+                            <p:panel header="Historique">
+                                <p:dataTable id="datalist" value="#{login.findDemandeFormationUser(login.uname)}" var="demande"
+                                             selectionMode="single" selection="#{demandeformationController.selectedView}"
+                                             rowKey="#{demande.idF}"
+                                             >
+                                    <p:ajax event="rowSelect" listener="#{demandeformationController.onRowSelect}" update=":ViewForm" oncomplete="PF('ViewDialog').show()" />
+            
+                                      <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Libelle"/>
+                                        </f:facet>
+                                          <h:outputText value="#{demande.libelle}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Etat"/>
+                                        </f:facet>
+                                        <h:outputText value="#{demande.etat}"/>
+                                    </p:column>
+
+                                </p:dataTable>
+                            </p:panel>
+                        </h:form>
+
+                    </b:column>
+                    <b:column span="8">
+                        <f:view>
+                            <h:form>
+                                <h1><h:outputText value="Creation d'une nouvelle demande de formation"/></h1>
+                                <p:panelGrid columns="2">
+
+                                    <p:outputLabel value="Libelle:" for="libelle" style="width: 200px"/>
+                                    <p:inputText id="libelle" value="#{demandeformationController.mademande.libelle}" title="Libelle" required="true"/>
+
+                                    <p:outputLabel value="DateFormation:" for="dateFormation" style="width: 200px"/>
+                                    <p:calendar id="dateFormation" value="#{demandeformationController.mademande.dateFormation}" title="DateFormation" required="true"  mode="inline">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"/>
+                                    </p:calendar>
+
+
+                                </p:panelGrid>
+                                <div class="submit">
+                                    <p:commandButton style="width: 200px; height: 35px;" value="Enregister" id="nonAjax01" action="#{demandeformationController.poster()}" ajax="false" />     
+
+                                </div>
+                            </h:form>
+                        </f:view>
+
+                    </b:column>
+                </b:row>
+                
+                
+                 <p:dialog id="ViewDlg" widgetVar="ViewDialog" showEffect="clip" hideEffect="clip" height="200" width="300" position="" header="Details">
+                    <h:form id="ViewForm">
+                        <h:panelGroup id="display">
+                            <p:panelGrid columns="2" rendered="#{not empty demandeformationController.selectedView}">
+                                <p:outputLabel value="Date de creation:"/>
+                                <h:outputLabel value="#{demandeformationController.selectedView.dateCreation}">
+                                <f:convertDateTime  pattern="dd-MM-YYYY" timeZone="Europe/Paris" />
+                                </h:outputLabel>
+                                <p:outputLabel value="Date de formation :" />
+                                <p:outputLabel value="#{demandeformationController.selectedView.dateFormation}" >
+                                <f:convertDateTime pattern="dd-MM-YYYY" timeZone="Europe/Paris" />
+                                </p:outputLabel>
+                                <p:outputLabel value="Libelle"/>
+                                <p:outputLabel  value="#{demandeformationController.selectedView.libelle}" />
+                  
+                                <p:outputLabel value="Etat:"  />
+                                <p:outputLabel value="#{demandeformationController.selectedView.etat}" />
+                            </p:panelGrid>
+                        </h:panelGroup>
+                    </h:form>
+                </p:dialog>
+
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

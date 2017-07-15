@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <body>
+
+        <ui:composition template="./../../template.xhtml">
+
+            <ui:define name="body">
+                <b:row>
+                    <b:column span="8">
+                        <h:form id="ListForm">
+                            <p:panel header="Historique">
+                                <p:dataTable id="datalist" value="#{login.ListCongeEmploye(login.uname)}" var="demande"
+                                             selectionMode="single" selection="#{demandeabsenceController.selectedView}"
+                                             rowKey="#{demande.idDemande}"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                             paginator="true" rows="6" style="margin-bottom:20px" 
+                                             >
+
+                                    <p:ajax event="rowSelect" listener="#{demandeabsenceController.onRowSelect}" update=":ViewForm" oncomplete="PF('ViewDialog').show()" />
+                                    <p:column style="width: 25px" >
+                                        <f:facet name="header">
+                                            <h:outputText value="Id"/>
+                                        </f:facet>
+                                        <h:outputText value="#{demande.idDemande}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Date de creation"/>
+                                        </f:facet>
+                                        <h:outputText value="#{demande.datecreation}">
+                                            <f:convertDateTime type="datetime" pattern="dd-MM-yyyy HH:mm:ss"  timeZone="Europe/Paris"/>
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Nombre de jours"/>
+                                        </f:facet>
+                                        <h:outputText value="#{demande.nombredejours}"/>
+                                      
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Etat"/>
+                                        </f:facet>
+                                        <h:outputText value="#{demande.etat}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:commandButton style="height: 20px"  icon="ui-icon-pencil" value="Modifier"  id="nonAjax11" action="#{demandeabsenceController.PrepareEdit(demande)}" ajax="false" />
+                                        <p:commandButton style="height: 20px ; color: #D20005" value="Supprimer" id="nonAjax2" action="#{demandeabsenceController.delete1(demande.idDemande)}" ajax="false" />
+                                    </p:column>
+
+
+                                </p:dataTable>
+                            </p:panel>
+                        </h:form>
+                    </b:column>
+                    <b:column span="4">
+                        <h:form id="ListForm1">
+                            <p:dataTable id="datalist" value="#{login.ListCongeEmploye(login.uname,'ACCORDE')}" var="demande"
+                                         selectionMode="single" selection="#{demandeabsenceController.selectedView}"
+                                         rowKey="#{demande.idDemande}">
+
+                                <p:ajax event="rowSelect" listener="#{demandeabsenceController.onRowSelect}" update=":ViewForm1" oncomplete="PF('ViewDialog1').show()" />
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nombre de jours"/>
+                                    </f:facet>
+                                    <h:outputText value="#{demande.nombredejours}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Etat"/>
+                                    </f:facet>
+                                    <h:outputText value="#{demande.etat}"/>
+                                </p:column>
+                            </p:dataTable>
+
+                        </h:form>
+                    </b:column>
+                </b:row>
+
+                <p:dialog id="ViewDlg" widgetVar="ViewDialog" showEffect="clip" hideEffect="clip" height="200" width="300" position="" header="Details">
+                    <h:form id="ViewForm">
+                        <h:panelGroup id="display">
+                            <p:panelGrid columns="2" rendered="#{not empty demandeabsenceController.selectedView}">
+                                <p:outputLabel value="Solde:"/>
+                                <h:outputLabel value="#{demandeabsenceController.selectedView.idEmploye.compte.solde}"/>
+                                <p:outputLabel value="Nombre de jours :" />
+                                <p:outputLabel value="#{demandeabsenceController.selectedView.nombredejours}" />
+                                <p:outputLabel value="Commentaire:"/>
+                                <p:outputLabel  value="#{demandeabsenceController.selectedView.commmentaire}" />
+                                <p:outputLabel value="Cause :"/>
+                                <p:outputLabel  value="#{demandeabsenceController.selectedView.type}" />
+
+                                <p:outputLabel value="Etat:"  />
+                                <p:outputLabel value="#{demandeabsenceController.selectedView.etat}" />
+                            </p:panelGrid>
+                        </h:panelGroup>
+                    </h:form>
+                </p:dialog>
+                <p:dialog id="ViewDlg2" widgetVar="ViewDialog1" showEffect="clip" hideEffect="clip" height="200" width="1000" position="" header="Details">
+                    <h:form id="ViewForm1">
+                        <div class="datagrid">
+                            <table  style="margin-right: 10px" >
+                                <thead>
+                                    <tr><th><p:outputLabel value="Id:" /></th>
+                                        <th><p:outputLabel value="Datecreation:" /></th>
+                                        <th><p:outputLabel value="Datede debut:" /></th>
+                                        <th><p:outputLabel value="Datefin:" /></th>
+                                        <th><p:outputLabel value="Cause/Type" /></th>
+                                        <th><p:outputLabel value="Commmentaire:" /></th>
+                                        <th><p:outputLabel value="Nombre de jours" /></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><p:outputLabel value="#{demandeabsenceController.selectedView.idDemande}" style="font-weight: bold"/></td>
+                                        <td>
+                                            <p:outputLabel value="#{demandeabsenceController.selectedView.datecreation}" style="font-weight: bold" >
+                                                <f:convertDateTime type="datetime" pattern="dd-MM-YYYY H:mm:ss" timeZone="Europe/Paris" />
+                                            </p:outputLabel>
+                                        </td>
+                                        <td>
+                                            <p:outputLabel value="#{demandeabsenceController.selectedView.datedebut}" style="font-weight: bold">
+                                                <f:convertDateTime pattern="dd-MM-YYYY" timeZone="Europe/Paris" />
+                                            </p:outputLabel>
+                                        </td>
+                                        <td>
+                                            <p:outputLabel value="#{demandeabsenceController.selectedView.datefin}" style="font-weight: bold">
+                                                <f:convertDateTime pattern="dd-MM-YYYY" timeZone="Europe/Paris" />
+                                            </p:outputLabel>
+                                        </td>                                            
+                                        
+                                        <td><p:outputLabel value="#{demandeabsenceController.selectedView.type}" style="font-weight: bold"/></td>
+                                        <td><p:outputLabel value="#{demandeabsenceController.selectedView.commmentaire}" style="font-weight: bold"/></td>
+                                        <td><p:outputLabel value="#{demandeabsenceController.selectedView.nombredejours}" style="font-weight: bold"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" style="align-content: center;"><p:outputLabel value="#{demandeabsenceController.selectedView.etat}" style="font-weight: bold"/></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </h:form>
+                </p:dialog>
+                <hr/>
+                <h:form>
+                    <p:commandButton value="Nouvelle Demande"  action="create.xhtml" styleClass="ui-priority-primary" />
+                </h:form>
+                <style type="text/css">
+                    .datagrid table { border-collapse: collapse; text-align: left; width: 100%; } .datagrid {font: normal 12px/150% Verdana, Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 10px solid #6A8699; }.datagrid table td, .datagrid table th { padding: 7px 19px; }.datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #999999), color-stop(1, #00117F) );background:-moz-linear-gradient( center top, #999999 5%, #00117F 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#999999', endColorstr='#00117F');background-color:#999999; color:#00FAFA; font-size: 18px; font-weight: bold; border-left: 0px solid #0070A8; } .datagrid table thead th:first-child { border: none; }.datagrid table tbody td { color: #3D576B; font-size: 24px;border-bottom: 3px solid #E1EEF4;font-weight: normal; }.datagrid table tbody td:first-child { border-left: none; }.datagrid table tbody tr:last-child td { border-bottom: none; }
+                </style>
+
+            </ui:define>
+
+            <ui:define name="footer">
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

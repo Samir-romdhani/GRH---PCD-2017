@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <body>
+
+        <ui:composition template="./../template0.xhtml">
+
+            <ui:define name="body">
+
+                <b:row>
+                    <b:column span="6">
+                        <f:view>
+                            <h:form>
+                                <h3><h:outputText value="Toutes les demandes"/></h3>
+                                <p:dataTable value="#{demandeformationController.formationATTENTE}" var="item">
+
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Libelle"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.libelle}"/>
+                                    </p:column>
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Date de Creation"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dateCreation}">
+                                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="Europe/Paris" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Date de Formation"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dateFormation}">
+                                            <f:convertDateTime pattern="dd-MM-yyyy"  timeZone="Europe/Paris"/>
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Etat"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.etat}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:commandButton style="height: 20px"  icon="ui-icon-pencil" value="Modifier"  id="nonAjax11" action="#{demandeformationController.PrepareEdit(item)}" ajax="false" />
+                                    </p:column>
+
+                                </p:dataTable>
+                            </h:form>
+                        </f:view>
+                    </b:column>
+                    <b:column span="6">
+                        
+                            <h:form>
+                                <h3><h:outputText value="Modifier :"/></h3>
+                                <p:panelGrid columns="2">
+                                    <p:outputLabel value="IdF:" for="idF" />
+                                    <p:inputText readonly="true" id="idF" value="#{demandeformationController.selected.idF}" title="IdF" />
+
+                                    <p:outputLabel value="DateFormation:" for="dateFormation" style="width: 200px"/>
+                                    <p:calendar id="dateFormation" value="#{demandeformationController.selected.dateFormation}" title="DateFormation"   mode="inline"/>
+
+                                    <p:outputLabel value="Etat:" for="etat" />
+                                    <p:selectOneMenu id="etat" value="#{demandeformationController.selected.etat}" style="width:125px">
+                                        <f:selectItem itemLabel="ATTENTE" itemValue="ATTENTE" />
+                                        <f:selectItem itemLabel="ACCORDE" itemValue="ACCORDE" />
+                                        <f:selectItem itemLabel="REFUS" itemValue="REFUS" />
+                                    </p:selectOneMenu>
+
+                                    <p:commandButton value="Enregistrer"  action="#{demandeformationController.edit()}" styleClass="ui-priority-primary" />
+                                </p:panelGrid>
+                            </h:form>
+                        
+                    </b:column>
+                </b:row>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

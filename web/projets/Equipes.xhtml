@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../template0.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="body">
+        <br/>
+
+        <h:form>
+            <p:dataList value="#{equipecontroller.equipes}" var="equip">
+                <p:tabView orientation="left">
+                    <p:tab title="#{equip.nomequipe}">
+                        <h:panelGrid columns="2" cellpadding="4">
+                            <p:graphicImage name="img/equipes/equipe.PNG" />
+                            <p:dataList value="#{equipecontroller.ListeEmployeEquipe(equip)}" var="employes" type="ordered">               
+                                <h3>Nom :#{employes.nom}</h3><br/>
+                                <h3>Poste :#{employes.identificationDuPoste.descriptionPoste}</h3>
+                                <br/><h3>Departement :#{employes.idDepartement.descriptionDepartement}</h3> 
+                                <!--
+                                <c:forEach var="jjjjj" items="#{equipecontroller.ListeEmployeEquipe(equip)}">
+                                    <h:outputText value="nom 1 : " />
+                                    <h:outputText value="#{jjjjj.nom}" />
+                                </c:forEach>
+                                -->
+                            </p:dataList>
+                        </h:panelGrid>
+                    </p:tab>
+                </p:tabView>
+            </p:dataList>
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>

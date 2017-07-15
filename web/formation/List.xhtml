@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../template0.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+    <ui:define name="body">
+        <b:row>
+            <h:outputText value="&lt;br/&gt;&lt;br/&gt;" escape="false" />
+            <b:column span="6">
+                <f:view>
+                    <h3><h:outputText style="font-weight: lighter" value="Demandes En Etat ATTENTE"/></h3>
+                    <h:form>  
+                        <p:dataTable value="#{demandeformationController.formationATTENTE}" var="item"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                     paginator="true" rows="6" style="margin-bottom:20px">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Libelle"/>
+                                </f:facet>
+                                <h:outputText value="#{item.libelle}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Employe"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idEmploye.nom}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Date de Creation"/>
+                                </f:facet>
+                                <h:outputText value="#{item.dateCreation}">
+                                     <f:convertDateTime pattern="dd-MM-YYYY" timeZone="Europe/Paris" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Date de Formation"/>
+                                </f:facet>
+                                <h:outputText value="#{item.dateFormation}">
+                                     <f:convertDateTime pattern="dd-MM-YYYY" timeZone="Europe/Paris" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Etat"/>
+                                </f:facet>
+                                <h:outputText value="#{item.etat}"/>
+                            </p:column>
+
+                            <p:column>
+                                <p:commandButton value="Voir la formation" id="nonAjax0" action="#{demandeformationController.Select(item)}" ajax="false" />
+
+                            </p:column>
+
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+
+
+               
+            </b:column>
+            <b:column span="6">
+                          
+                    <f:view>
+                        <h3><h:outputText style="font-weight: lighter" value="Demandes Acceptées"/></h3>
+                        <h:form>  
+                            <p:dataTable value="#{demandeformationController.formationACCORDE}" var="item"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                         paginator="true" rows="6" style="margin-bottom:20px">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Libelle"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.libelle}" />
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Employe"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idEmploye.nom}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Date de Creation"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.dateCreation}">
+                                         <f:convertDateTime pattern="dd-MM-YYYY" timeZone="Europe/Paris" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Date de Formation"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.dateFormation}">
+                                         <f:convertDateTime pattern="dd-MM-YYYY" timeZone="Europe/Paris" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Etat"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.etat}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <p:commandButton value="Voir la formation" id="nonAjax0" action="#{demandeformationController.Select(item)}" ajax="false" />
+
+                                </p:column>
+
+                            </p:dataTable>
+                        </h:form>
+                    </f:view>
+            </b:column>
+        </b:row>
+        <b:row>
+            <b:column span="12">
+                 <f:view>
+                    <h:form>
+                        <h3><h:outputText style="font-weight: lighter" value="Evaluations de formations"/></h3>
+                        <p:dataTable value="#{evaluationController.evaluations}" var="item1">
+                            <p:column style="width: 150px" >
+                                <f:facet name="header">
+                                    <h:outputText value="Formation"/>
+                                </f:facet>
+                                <h:outputText value="#{item1.idF.libelle}" />
+                            </p:column>
+                            <p:column style="width: 150px">
+                                <f:facet name="header">
+                                    <h:outputText value="Competence"/>
+                                </f:facet>
+                                <h:outputText value="#{item1.idC.descriptions}"/>
+                            </p:column>
+                            <p:column style="width: 200px">
+                                <f:facet name="header">
+                                    <h:outputText value="Note"/>
+                                </f:facet>
+                                <p:rating value="#{item1.note}"  stars="5" readonly="true" />
+                                <h:outputText value="#{item1.idEmploye.nom}" />
+
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </f:view>   
+
+            </b:column>
+        </b:row>
+            <b:row>
+                <b:column span="12">
+                    <f:view>
+                    <h3><h:outputText style="font-weight: lighter" value="Demandes refusées"/></h3>
+                    <h:form>  
+                        <p:dataTable value="#{demandeformationController.formationREFUS}" var="item"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                     paginator="true" rows="6" style="margin-bottom:20px">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Libelle"/>
+                                </f:facet>
+                                <h:outputText value="#{item.libelle}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Employe"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idEmploye.nom}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Date de Creation"/>
+                                </f:facet>
+                                <h:outputText value="#{item.dateCreation}">
+                                     <f:convertDateTime pattern="dd-MM-YYYY" timeZone="Europe/Paris" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Date de Formation"/>
+                                </f:facet>
+                                <h:outputText value="#{item.dateFormation}">
+                                     <f:convertDateTime pattern="dd-MM-YYYY" timeZone="Europe/Paris" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Etat"/>
+                                </f:facet>
+                                <h:outputText value="#{item.etat}"/>
+                            </p:column>
+
+                            <p:column>
+                                <p:commandButton value="Voir la formation" id="nonAjax0" action="#{demandeformationController.Select(item)}" ajax="false" />
+
+                            </p:column>
+
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+
+                </b:column>
+        </b:row>
+    </ui:define>
+
+</ui:composition>

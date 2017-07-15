@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../template0.xhtml">
+
+            <ui:define name="body">
+                <f:view>
+                    <h:form>
+                        
+                        <h:outputText style="font-weight: lighter; align-items: center" value="&lt;h3&gt;Missions&lt;h3/&gt;" escape="false"/>
+                        <p:dataTable value="#{missionController.missions}" var="item">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Identifiant de mission"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idMission}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Date de Debut"/>
+                                </f:facet>
+                                <h:outputText value="#{item.dateDebut}">
+                                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Date de Fin"/>
+                                </f:facet>
+                                <h:outputText value="#{item.dateFin}">
+                                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Lieu"/>
+                                </f:facet>
+                                <h:outputText value="#{item.lieuMission}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Equipe Participante"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idEquipe.nomequipe}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Projet"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idProjet.nomProjet}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Taches"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idTache.libelleTache}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

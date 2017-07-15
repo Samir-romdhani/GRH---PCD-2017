@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <body>
+
+        <ui:composition template="./../login.xhtml">
+
+            <ui:define name="top">
+                <img alt="GRH" src="resources/img/images.png" onmousemove="focus()"/>
+                <img alt="GRH" src="resources/img/responsable-ressources-humaines.jpg" onmousemove="focus()" style="width: 400px; height: 150px; margin-left: 200px"></img>
+                <h:outputText style="font-weight: lighter; align-items: center" value="&lt;h3&gt;Application de gestion des ressources humaines&lt;h3/&gt;" escape="false"/>
+                <hr />
+            </ui:define>  
+            <ui:define name="content">
+                <f:view>
+                    <h:form>
+
+                        <h:outputText style="font-weight: lighter; align-items: center" value="&lt;h3&gt;Demande D'emploi&lt;h3/&gt;" escape="false"/>
+                        <p:panelGrid columns="2">
+                            <b:column span="4">
+                                <p:outputLabel value="Nom:" for="nom" />
+                                <p:inputText id="nom" value="#{condidatController.condidat.nom}" title="Nom"  required="true" requiredMessage="Nom required."/>
+                                <p:outputLabel value="Prenom:" for="prenom" />
+                                <p:inputText id="prenom" value="#{condidatController.condidat.prenom}" title="Prenom" required="true" requiredMessage="Prenom required."/>
+                                <p:outputLabel value="Mail:" for="mail" />
+                                <p:inputText id="mail" value="#{condidatController.condidat.mail}" title="Mail" required="true" requiredMessage="Mail required."/>
+                                <p:outputLabel value="Date de naissance:" for="datedenaissance" />
+                            <p:calendar id="datedenaissance" value="#{condidatController.condidat.datedenaissance}" required="true"  pages="1" maxdate="01-01-1994" title="datedenaissance" pattern="dd-MM-yyyy" requiredMessage="Date de naissance required."/>
+                            </b:column>
+
+                            <b:column span="4">
+                                <p:outputLabel value="Adresse:" for="adresse" />
+                                <p:inputText id="adresse" value="#{condidatController.condidat.adresse}" title="Adresse" />
+                                <p:outputLabel value="Ville:" for="ville" />
+                                <p:inputText id="ville" value="#{condidatController.condidat.ville}" title="Ville" />
+                                <p:outputLabel value="Tel:" for="tel" />
+                                <p:inputText id="tel" value="#{condidatController.condidat.tel}" title="Tel" />
+                                <p:outputLabel value="Code postal:" for="codepostal" />
+                                <p:inputText id="codepostal" value="#{condidatController.condidat.codepostal}" title="Codepostal" />
+                                <p:outputLabel value="Sexe:" for="sexe" />
+                                <p:selectOneRadio id="sexe" value="#{condidatController.condidat.sexe}" required="true" requiredMessage="Sexe : required.">
+                                    <f:selectItem itemLabel="Homme" itemValue="Homme" />
+                                    <f:selectItem itemLabel="Femme" itemValue="Femme" />
+                                </p:selectOneRadio>
+                            </b:column>
+                            <b:column span="4">
+                                <p:outputLabel value="Scolarité:" for="scolarité" />
+                                <p:inputText id="scolarité" value="#{condidatController.condidat.scolarité}" title="Scolarité" />
+                                <p:outputLabel value="Competences:" for="competences" />
+                                <p:inputTextarea id="competences"  value="#{condidatController.condidat.competences}" title="competences" rows="6" cols="33" />
+                                <p:outputLabel value="Certifications:" for="certifications" />
+                                <p:inputTextarea id="certifications"  value="#{condidatController.condidat.certifications}" title="certifications" rows="6" cols="33" />
+                            
+                            </b:column>
+                        </p:panelGrid>
+                        <p:commandButton class="submit" style="width: 200px; height: 35px;" value="Enregister" id="nonAjax01" action="#{condidatController.poster()}" ajax="true" />                             
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+

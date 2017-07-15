@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <p:dataTable value="#{metierController.metiers}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="IdentificationDuPoste"/>
+                        </f:facet>
+                        <h:outputText value="#{item.identificationDuPoste}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="MissionDuPoste"/>
+                        </f:facet>
+                        <h:outputText value="#{item.missionDuPoste}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="NomDuPoste"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nomDuPoste}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="DescriptionPoste"/>
+                        </f:facet>
+                        <h:outputText value="#{item.descriptionPoste}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <p:dataTable value="#{employeManagedBean.employes}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="IdEmploye"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idEmploye}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nom"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nom}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tel"/>
+                        </f:facet>
+                        <h:outputText value="#{item.tel}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Sexe"/>
+                        </f:facet>
+                        <h:outputText value="#{item.sexe}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Adresse"/>
+                        </f:facet>
+                        <h:outputText value="#{item.adresse}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Prenom"/>
+                        </f:facet>
+                        <h:outputText value="#{item.prenom}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Mail"/>
+                        </f:facet>
+                        <h:outputText value="#{item.mail}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Datedenaissance"/>
+                        </f:facet>
+                        <h:outputText value="#{item.datedenaissance}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Datedetravail"/>
+                        </f:facet>
+                        <h:outputText value="#{item.datedetravail}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Motdepass"/>
+                        </f:facet>
+                        <h:outputText value="#{item.motdepass}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Compte"/>
+                        </f:facet>
+                        <h:outputText value="#{item.compte}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Chef"/>
+                        </f:facet>
+                        <h:outputText value="#{item.chef}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="IdEquipe"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idEquipe}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="IdDepartement"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idDepartement}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="IdentificationDuPoste"/>
+                        </f:facet>
+                        <h:outputText value="#{item.identificationDuPoste}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+

@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../template0.xhtml">
+
+            <ui:define name="body">
+                <f:view>
+                    <h:form>
+                        <h1><h:outputText value="Create/Edit"/></h1>
+                        <p:panelGrid columns="2">
+                            
+                            <p:outputLabel value="IdDemande:" for="idDemande" />
+                            <p:inputText id="idDemande" value="#{demandeabsenceController.selected.idDemande}" title="IdDemande" required="true" requiredMessage="The IdDemande field is required."/>
+                 
+                            <p:outputLabel value="Etat:" for="etat" />
+                            <p:inputText id="etat" value="#{demandeabsenceController.selected.etat}" title="Etat" />
+  
+                          <h:commandButton value="save" action="#{demandeabsenceController.editAdmin()}" />
+
+                        </p:panelGrid>
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

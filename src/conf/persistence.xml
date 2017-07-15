@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="Application_GRH4_2PU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>tn.ensi.rh.entities.Departement</class>
+    <class>tn.ensi.rh.entities.Tache</class>
+    <class>tn.ensi.rh.entities.Demandeemploi</class>
+    <class>tn.ensi.rh.entities.Mission</class>
+    <class>tn.ensi.rh.entities.Metier</class>
+    <class>tn.ensi.rh.entities.Condidat</class>
+    <class>tn.ensi.rh.entities.ChefDeProjet</class>
+    <class>tn.ensi.rh.entities.Demandeformation</class>
+    <class>tn.ensi.rh.entities.Equipe</class>
+    <class>tn.ensi.rh.entities.Compte</class>
+    <class>tn.ensi.rh.entities.Employe</class>
+    <class>tn.ensi.rh.entities.Projet</class>
+    <class>tn.ensi.rh.entities.Competence</class>
+    <class>tn.ensi.rh.entities.Formation</class>
+    <class>tn.ensi.rh.entities.Evaluation</class>
+    <class>tn.ensi.rh.entities.Demandeabsence</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/rhdb1?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+    </properties>
+  </persistence-unit>
+</persistence>

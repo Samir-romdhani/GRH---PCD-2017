@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <body>
+
+        <ui:composition template="/template.xhtml">
+
+            <ui:define name="body">
+                <b:row>
+                    <b:column span="4">
+                        <h:form id="ListForm">
+                            <p:panel header="Historique">
+                                <p:dataTable id="datalist" value="#{login.ListCongeEmploye(login.uname)}" var="demande"
+                                             selectionMode="single" selection="#{demandeabsenceController.selectedView}"
+                                             rowKey="#{demande.idDemande}"
+                                             >
+                                    <p:ajax event="rowSelect" listener="#{demandeabsenceController.onRowSelect}" update=":ViewForm" oncomplete="PF('ViewDialog').show()" />
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Date"/>
+                                        </f:facet>
+                                        <h:outputText value="#{demande.datecreation}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Etat"/>
+                                        </f:facet>
+                                        <h:outputText value="#{demande.etat}"/>
+                                    </p:column>
+
+                                </p:dataTable>
+                            </p:panel>
+                        </h:form>
+
+                    </b:column>
+
+                    <b:column span="8">
+                        <h:form>
+                            <p:outputLabel style="font-weight: lighter" value="&lt;h3&gt;Creation de nouvelle demande de congé&lt;h3/&gt;" escape="false"/>
+                            <p:panelGrid columns="2" style="margin-top: 10px;">
+
+                                <p:outputLabel value="Date de debut:" for="datedebut" style="width: 200px"  />
+                                <p:calendar id="datedebut" value="#{demandeabsenceController.mademande.datedebut}"  pages="3" mindate="25/04/2017" title="Datedebut" pattern="dd/MM/yyyy"/>
+
+                                <p:outputLabel value="Date de fin:" for="datefin" style="width: 200px" />
+                                <p:calendar id="datefin" value="#{demandeabsenceController.mademande.datefin}" pages="3" mindate="demandeabsenceController.mademande.datedebut" title="Datefin" pattern="dd/MM/yyyy"/>
+
+                                <p:outputLabel id="labelextra1" value="Type:" for="type" style="width: 200px" >
+                                    <p:selectOneMenu id="findex" value="#{demandeabsenceController.mademande.type}">
+                                        <f:selectItem itemLabel="" itemValue="" />
+                                        <f:selectItem itemLabel="événements familiaux" itemValue="événements familiaux" />
+                                        <f:selectItem itemLabel="Voyage" itemValue="Voyage" />
+                                        <f:selectItem itemLabel="Maternité/Paternité" itemValue="Maternité/Paternité" />
+                                        <f:selectItem itemLabel="proche aidant" itemValue="proche aidant" />
+                                        <p:ajax update="labelextra1 type" />
+                                    </p:selectOneMenu>
+                                </p:outputLabel>
+                                <p:inputTextarea id="type" value="#{demandeabsenceController.mademande.type}" title="Type" rows="3" cols="33"/>
+
+                                <p:outputLabel value="Commmentaire:" for="commmentaire" style="width: 200px" />
+                                <p:inputTextarea id="commmentaire"  value="#{demandeabsenceController.mademande.commmentaire}" title="Commmentaire" rows="6" cols="33" />
+
+                            </p:panelGrid>
+                            <div class="submit">
+                                <p:commandButton style="width: 200px; height: 35px;" value="Enregister" id="nonAjax0" action="#{demandeabsenceController.poster()}" ajax="false" />     
+                            </div>
+                        </h:form>
+                    </b:column>
+                </b:row>
+
+
+                <p:dialog id="ViewDlg" widgetVar="ViewDialog" showEffect="clip" hideEffect="clip" height="200" width="300" position="" header="Details">
+                    <h:form id="ViewForm">
+                        <h:panelGroup id="display">
+                            <p:panelGrid columns="2" rendered="#{not empty demandeabsenceController.selectedView}">
+                                <p:outputLabel value="Solde:"/>
+                                <h:outputLabel value="#{demandeabsenceController.selectedView.idEmploye.compte.solde}"/>
+                                <p:outputLabel value="Nombre de jours :" />
+                                <p:outputLabel value="#{demandeabsenceController.selectedView.nombredejours}" />
+                                <p:outputLabel value="Commentaire:"/>
+                                <p:outputLabel  value="#{demandeabsenceController.selectedView.commmentaire}" />
+                                <p:outputLabel value="Cause :"/>
+                                <p:outputLabel  value="#{demandeabsenceController.selectedView.type}" />
+                            
+                                <p:outputLabel value="Etat:"  />
+                                <p:outputLabel value="#{demandeabsenceController.selectedView.etat}" />
+                            </p:panelGrid>
+                        </h:panelGroup>
+                    </h:form>
+                </p:dialog>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <body>
+
+        <ui:composition template="./../../template.xhtml">
+
+            <ui:define name="body">
+                <b:row>
+                    <b:column span="8">
+                        <f:view>
+                            <h:form>
+                                <h3><h:outputText value="Toutes les demandes"/></h3>
+                                <p:dataTable value="#{login.findDemandeFormationUser(login.uname)}" var="item"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                             paginator="true" rows="5" style="margin-bottom:20px">
+
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Libelle"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.libelle}"/>
+                                    </p:column>
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Date de Creation"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dateCreation}">
+                                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="Europe/Paris" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Date de Formation"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dateFormation}">
+                                            <f:convertDateTime pattern="dd-MM-yyyy"  timeZone="Europe/Paris"/>
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Etat"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.etat}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:commandButton style="height: 20px"  icon="ui-icon-pencil" value="Modifier"  id="nonAjax11" action="#{demandeformationController.PrepareEdit(item)}" ajax="false" />
+                                        <p:commandButton style="height: 20px ; color: #D20005" value="Supprimer" id="nonAjax2" action="#{demandeformationController.delete1(item.idF)}" ajax="false" />
+                                    </p:column>
+
+                                </p:dataTable>
+                            </h:form>
+                        </f:view>
+                    </b:column>
+                    <b:column span="4">
+                        <f:view>
+                            <h:form id="ListForm2">
+                                <h3><h:outputText value="Demandes Acceptées"/></h3>
+                                <p:dataTable value="#{login.findDemandeFormationUser(login.uname , 'ACCORDE')}" var="item"
+                                             >
+
+                                    <p:ajax event="rowSelect" listener="#{findDemandeFormationUser.onRowSelect}" update=":ViewForm2" oncomplete="PF('ViewDialog2').show()" />
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Id"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idF}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Libelle"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.libelle}"/>
+                                    </p:column>
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Date de Creation"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dateCreation}">
+                                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="Europe/Paris" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Date de Formation"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dateFormation}">
+                                            <f:convertDateTime pattern="dd-MM-yyyy"  timeZone="Europe/Paris"/>
+                                        </h:outputText>
+                                    </p:column>
+
+
+                                </p:dataTable>
+                            </h:form>
+                        </f:view>
+                    </b:column>
+                </b:row>
+
+
+                <p:dialog id="ViewDlg2" widgetVar="ViewDialog2" showEffect="clip" hideEffect="clip" height="200" width="1000" position="" header="Details">
+                    <h:form id="ViewForm2">
+                       
+                                <h:panelGroup id="display">
+                                    <p:panelGrid columns="2" rendered="#{not empty demandeformationController.selectedView}">
+                                        <p:outputLabel value="dateCreation"/>
+                                        <h:outputLabel value="#{demandeformationController.selectedView.dateCreation}"/>
+                                        <p:outputLabel value="dateFormation :" />
+                                        <p:outputLabel value="#{demandeformationController.selectedView.dateFormation}" />
+                                        <p:outputLabel value="libelle"/>
+                                        <p:outputLabel  value="#{demandeformationController.selectedView.libelle}" />
+                                    </p:panelGrid>
+                                </h:panelGroup>
+                         
+
+                    </h:form>
+                </p:dialog>
+                <hr/>
+                <h:form>
+                    <p:commandButton value="Nouvelle Demande"  action="create.xhtml" styleClass="ui-priority-primary" />
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

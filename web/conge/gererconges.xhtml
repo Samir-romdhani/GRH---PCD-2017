@@ -1,0 +1,234 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <body>
+        <ui:composition template="./../template0.xhtml">
+            <ui:define name="body">
+                <br/><br/>
+                <b:row>
+                    <b:column span="9">
+                        <f:view>
+                            <h:form>
+                                <h3><h:outputText style="font-weight: lighter" value="Demandes En Etat ATTENTE"/></h3>
+
+                                <p:dataTable value="#{demandeabsenceController.congesATTENTE}" var="item">
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Date de creation"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.datecreation}">
+                                            <f:convertDateTime type="datetime" pattern="dd-MM-YYYY H:mm:ss" timeZone="Europe/Paris" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Nombre de jours"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.nombredejours}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Debut"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.datedebut}">
+                                            <f:convertDateTime pattern="dd-MM-YYYY" timeZone="Europe/Paris" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Fin"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.datefin}">
+                                            <f:convertDateTime pattern="dd-MM-YYYY" timeZone="Europe/Paris" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Cause"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.type}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Commmentaire"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.commmentaire}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Etat"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.etat}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Employe"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idEmploye.nom}"/>
+                                    </p:column>
+                                    <p:column>
+
+                                        <p:commandButton value="Voir la demande" id="nonAjax0" action="#{demandeabsenceController.Select(item)}" ajax="false" />                                    
+                                    </p:column>
+                                </p:dataTable>
+                            </h:form>
+                        </f:view>
+                    </b:column>
+                    <b:column span="3">
+                        <h3><h:outputText style="font-weight: lighter" value="Demandes acceptées"/></h3>
+                        <h:form id="ListForm">
+                            <p:dataTable value="#{demandeabsenceController.congesACCORDE}" var="item"
+                                         selectionMode="single" selection="#{demandeabsenceController.selectedView}"
+                                         rowKey="#{item.idDemande}">
+                                <p:ajax event="rowSelect" listener="#{demandeabsenceController.onRowSelect}" update=":ViewForm3" oncomplete="PF('ViewDialog3').show()" />
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="NOM"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idEmploye.nom}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="NOMBRES DE JOURS"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nombredejours}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </b:column>
+                </b:row>
+                <b:row>
+                    <b:column span="12">
+                        <f:view>
+                            <h:form>
+                                <h1><h:outputText style="font-weight: lighter" value="Liste de toutes les demandes"/></h1>
+                                <p:dataTable value="#{demandeabsenceController.conges}" var="item"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                             paginator="true" rows="10" style="margin-bottom:20px">
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="IdDemande"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idDemande}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Datecreation"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.datecreation}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Datedebut"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.datedebut}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Nombredejours"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.nombredejours}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Datefin"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.datefin}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Commmentaire"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.commmentaire}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Etat"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.etat}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="IdEmploye"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idEmploye.nom}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:commandButton value="Voir la demande" id="nonAjax0" action="#{demandeabsenceController.View(item)}" ajax="false" />
+                                        <p:commandButton value="Modifier" id="nonAjax1" action="#{demandeabsenceController.Select(item)}" ajax="false" />
+
+
+
+                                    </p:column> 
+                                </p:dataTable>
+                            </h:form>
+                        </f:view>
+
+                    </b:column>
+                </b:row>
+                <p:dialog id="ViewDlg3" widgetVar="ViewDialog3" showEffect="clip" hideEffect="clip" height="200" width="1000" position="" header="Details">
+                    <h:form id="ViewForm3">
+                        <div class="datagrid">
+                            <table  style="margin-right: 10px" >
+                                <thead>
+                                    <tr>
+                                        <th><p:outputLabel value="Date de creation:" /></th>
+                                        <th><p:outputLabel value="Date de debut:" /></th>
+                                        <th><p:outputLabel value="Date de fin:" /></th>
+                                        <th><p:outputLabel value="Type" /></th>
+                                        <th><p:outputLabel value="Commmentaire:" /></th>
+                                        <th><p:outputLabel value="Nombre de jours" /></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><p:outputLabel value="#{demandeabsenceController.selectedView.datecreation}" style="font-weight: bold" >
+                                                <f:convertDateTime type="datetime" pattern="dd-MM-YYYY H:mm:ss" timeZone="Europe/Paris" />
+                                            </p:outputLabel>
+                                        </td>
+                                        <td><p:outputLabel value="#{demandeabsenceController.selectedView.datedebut}" style="font-weight: bold">
+                                                <f:convertDateTime pattern="dd-MM-YYYY" timeZone="Europe/Paris" />
+                                            </p:outputLabel>
+                                        </td>
+                                        <td><p:outputLabel value="#{demandeabsenceController.selectedView.datefin}" style="font-weight: bold">
+                                                <f:convertDateTime pattern="dd-MM-YYYY" timeZone="Europe/Paris" />
+                                            </p:outputLabel>
+                                        </td>                                            
+
+                                        <td><p:outputLabel value="#{demandeabsenceController.selectedView.type}" style="font-weight: bold"/></td>
+                                        <td><p:outputLabel value="#{demandeabsenceController.selectedView.commmentaire}" style="font-weight: bold"/></td>
+                                        <td><p:outputLabel value="#{demandeabsenceController.selectedView.nombredejours}" style="font-weight: bold"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" style="align-content: center;"><p:outputLabel value="#{demandeabsenceController.selectedView.etat}" style="font-weight: bold"/></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </h:form>
+                </p:dialog>
+
+                <style type="text/css">
+                    .datagrid table { border-collapse: collapse; text-align: left; width: 100%; } .datagrid {font: normal 12px/150% Verdana, Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; }.datagrid table td, .datagrid table th { padding: 12px 20px; }.datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #031C99), color-stop(1, #7F7F7F) );background:-moz-linear-gradient( center top, #031C99 5%, #7F7F7F 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#031C99', endColorstr='#7F7F7F');background-color:#031C99; color:#16FA44; font-size: 18px; font-weight: bold; border-left: 0px solid #0070A8; } .datagrid table thead th:first-child { border: none; }.datagrid table tbody td { color: #130D6B; border-left: 1px solid #3FDCF4;font-size: 12px;border-bottom: 1px solid #E1EEF4;font-weight: normal; }.datagrid table tbody .alt td { background: #E1EEf4; color: #00557F; }.datagrid table tbody td:first-child { border-left: none; }.datagrid table tbody tr:last-child td { border-bottom: none; }
+                </style>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

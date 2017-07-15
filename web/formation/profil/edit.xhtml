@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <body>
+
+        <ui:composition template="./../../template.xhtml">
+
+            <ui:define name="body">
+                <b:row>
+                    <b:column span="6">
+                          <f:view>
+                            <h:form>
+                                <h3><h:outputText value="Toutes les demandes"/></h3>
+                                <p:dataTable value="#{login.findDemandeFormationUser(login.uname)}" var="item"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                             paginator="true" rows="5" style="margin-bottom:20px">
+
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Libelle"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.libelle}"/>
+                                    </p:column>
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Date de Creation"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dateCreation}">
+                                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="Europe/Paris" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Date de Formation"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dateFormation}">
+                                            <f:convertDateTime pattern="dd-MM-yyyy"  timeZone="Europe/Paris"/>
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Etat"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.etat}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:commandButton style="height: 20px"  icon="ui-icon-pencil" value="Modifier"  id="nonAjax11" action="#{demandeformationController.PrepareEdit(item)}" ajax="false" />
+                                        <p:commandButton style="height: 20px ; color: #D20005" value="Supprimer" id="nonAjax2" action="#{demandeformationController.delete1(item.idF)}" ajax="false" />
+                                    </p:column>
+
+                                </p:dataTable>
+                            </h:form>
+                        </f:view>
+                    </b:column>
+                    <b:column span="6">
+                        <f:view>
+                            <h:form>
+                                <h3><h:outputText value="Modifier :"/></h3>
+                                <p:panelGrid columns="2">
+                                    <p:outputLabel value="IdF:" for="idF" />
+                                    <p:inputText readonly="true" id="idF" value="#{demandeformationController.selected.idF}" title="IdF" required="true" requiredMessage="The IdF field is required."/>
+                                    <p:outputLabel value="Libelle:" for="libelle" />
+                                    <p:inputText id="libelle" value="#{demandeformationController.selected.libelle}" title="Libelle" />
+
+          
+                                    <p:outputLabel value="DateFormation:" for="dateFormation" style="width: 200px"/>
+                                    <p:calendar id="dateFormation" value="#{demandeformationController.selected.dateFormation}" title="DateFormation"   mode="inline">
+                                    
+                                    </p:calendar>
+                                    
+                                    <p:commandButton value="Enregistrer" action="#{demandeformationController.edit1()}" />
+                                </p:panelGrid>
+                            </h:form>
+                        </f:view>
+                    </b:column>
+                </b:row>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

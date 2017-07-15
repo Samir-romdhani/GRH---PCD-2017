@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../template0.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="body">
+        <f:view>
+
+
+            <h:form>
+                <p:dataTable value="#{demandeformationController.demandes}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="IdF"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idF}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Libelle"/>
+                        </f:facet>
+                        <h:outputText value="#{item.libelle}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Etat"/>
+                        </f:facet>
+                        <h:outputText value="#{item.etat}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="DateCreation"/>
+                        </f:facet>
+                        <h:outputText value="#{item.dateCreation}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="DateFormation"/>
+                        </f:facet>
+                        <h:outputText value="#{item.dateFormation}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="IdEmploye"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idEmploye}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+
+    </ui:define>
+
+</ui:composition>
